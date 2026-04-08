@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Leaf, Search, Camera, BookOpen, Menu, X, User, LogOut } from "lucide-react";
+import { Leaf, Search, Camera, BookOpen, Menu, X, User, LogOut, Sprout } from "lucide-react";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
@@ -10,6 +10,10 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 const navLinks = [
   { href: "/plants", label: "Catalogue", icon: BookOpen },
   { href: "/identify", label: "Identifier", icon: Camera },
+];
+
+const authNavLinks = [
+  { href: "/mon-jardin", label: "Mon Jardin", icon: Sprout },
 ];
 
 export default function Navbar() {
@@ -46,6 +50,20 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map(({ href, label, icon: Icon }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  pathname.startsWith(href)
+                    ? "bg-green-50 text-green-700"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {label}
+              </Link>
+            ))}
+            {user && authNavLinks.map(({ href, label, icon: Icon }) => (
               <Link
                 key={href}
                 href={href}
@@ -104,6 +122,21 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-100 bg-white px-4 py-3 flex flex-col gap-1">
           {navLinks.map(({ href, label, icon: Icon }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                pathname.startsWith(href)
+                  ? "bg-green-50 text-green-700"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              {label}
+            </Link>
+          ))}
+          {user && authNavLinks.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
