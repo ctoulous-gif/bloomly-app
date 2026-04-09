@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Leaf, Search, Camera, BookOpen, Menu, X, User, LogOut, Sprout } from "lucide-react";
+import { Leaf, Search, Camera, BookOpen, Menu, X, User, LogOut, Sprout, Stethoscope } from "lucide-react";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
@@ -10,6 +10,7 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 const navLinks = [
   { href: "/plants", label: "Catalogue", icon: BookOpen },
   { href: "/identify", label: "Identifier", icon: Camera },
+  { href: "/diagnostic", label: "Diagnostic", icon: Stethoscope },
 ];
 
 const authNavLinks = [
